@@ -7,7 +7,7 @@ pool:
 stages:
  - stage: Build
    jobs:
-    - job: Firstjob
+    - job: Firstjobp
       steps:
       - bash: echo Build FirstJob
     - job: Secondjob
@@ -23,12 +23,16 @@ stages:
       steps:
       - bash: echo $(PilelineLevelVariable) Dev Deploy job
  - stage: QaDeploy
+   variables:
+     environment: QA
    dependsOn: Build
    jobs:
     - job: QaDeploy
       steps:
       - bash: echo $(PilelineLevelVariable) QaDeploy
  - stage: ProdDeploy
+   variables:
+     environment: Prod
    dependsOn:
    - DevDeploy
    - QaDeploy
