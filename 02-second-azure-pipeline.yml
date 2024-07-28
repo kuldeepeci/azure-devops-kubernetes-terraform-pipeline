@@ -18,6 +18,10 @@ stages:
       - bash: echo $(System.DefaulsWorkingDirectory)
       - bash: ls -r $(System.DefaulsWorkingDirectory)
       - bash: echo $(Build.ArtifactStagingDirectory)
+      - bash: echo java -version
+      - bash: echo node --version
+      - bash: echo python --version
+      - bash: echo mv -version
     # - job: Secondjob
     #   steps:
     #   - bash: echo Build SecondtJob
