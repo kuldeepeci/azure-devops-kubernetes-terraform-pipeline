@@ -8,15 +8,9 @@ strategy:
   mac:
    operatingSystem: 'macos-latest'
 
-pool
+pool:
   vmImage: $(operatingSystem)
-
 
   steps:
   - script: echo $(operatingSystem)
     displayName: 'Run a one-line script'
-  - script:
-     echo Add other tasks to build, test, and deploy your project.
-     echo See https://aka.ms/yaml
-     echo more information
-    displayName: 'Run a multi-line script'
