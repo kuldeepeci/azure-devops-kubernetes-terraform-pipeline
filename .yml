@@ -16,10 +16,10 @@ stages:
     pool:
       vmImags: 'Ubuntu-latest'
     steps:
-- task: Docker@2
-  inputs:
-    containerRegistry: 'kuldeepazad15-docker-hub'
-    repository: 'kuldeepazad15/currency-exchange-devops'
-    command: 'buildAndPush'
-    Dockerfile: '$(Build.SourceDirectory)/Dockerfile'
-    tags: '$(tag)'
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'kuldeepazad15-docker-hub'
+        repository: 'kuldeepazad15/currency-exchange-devops'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourceDirectory)/Dockerfile'
+        tags: '$(tag)'
