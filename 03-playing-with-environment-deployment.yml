@@ -1,25 +1,39 @@
 trigger:
 - main
 
-resources:
-- repo: self
+# strategy:
+#  matrix:
+#   linux:
+#    operatingSystem: 'ubuntu-latest'
+#   mac:
+#    operatingSystem: 'macos-latest'
 
-variables:
-  tag: '$(Build.BuildId)'
+# pool:
+#   vmImage: $(operatingSystem)
+pool:
+  vmImage: 'ubuntu-latest'
 
 stages:
 - stage: Build
-  displayName: Build Image
   jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImags: 'Ubuntu-latest'
+  - job: BuildJob
     steps:
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'kuldeepazad15-docker-hub'
-        repository: '$(Build.SourceDirectory)/Dockerfile'
-        command: 'buildAndPush'
-        Dockerfile: '$(Build.SourceDirectory)/Dockerfile'
-        Tags: '$(tag)'
+    - bash: echo "Do the Build"
+- stage: DevDeploy
+  jobs:
+  - deployment: DevDeployJob
+    environment: Dev
+    strategy:
+        runOnce:
+          deploy:
+            steps:
+            - script: echo "Deploy to Dev"
+- stage: QADeploy
+  jobs:
+  - deployment: QADeployJob
+    environment: QA
+    strategy:
+        runOnce:
+          deploy:
+            steps:
+            - script: echo "Deploy to QA"
