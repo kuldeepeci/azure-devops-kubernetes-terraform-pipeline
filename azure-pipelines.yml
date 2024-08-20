@@ -22,5 +22,5 @@ stages:
           containerRegistry: 'kuldeepazad15-docker-hub'
           repository: 'kuldeepazad15/currency-exchange-devops'
           command: 'buildAndPush'
-          Dockerfile: '$(Build.SourceDirectory)/Dockerfile'
+          Dockerfile: 'https://github.com/kuldeepeci/azure-devops-kubernetes-terraform-pipeline/blob/main/Dockerfile'
           tags: '$(tag)'
