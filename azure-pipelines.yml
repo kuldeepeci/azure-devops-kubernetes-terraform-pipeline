@@ -1,5 +1,5 @@
 trigger:
-- main
+- master
 
 resources:
 - repo: self
@@ -9,18 +9,17 @@ variables:
 
 stages:
 - stage: Build
-  displayName: Build Image
-  jobs:
+  displayName: Build image
+  jobs:  
   - job: Build
     displayName: Build
     pool:
-      vmImags: 'Ubuntu-latest'
+      vmImage: 'ubuntu-latest'
     steps:
-      - task: Docker@2
-        displayName: Build an Image
-        inputs:
-          containerRegistry: 'kuldeepazad15-docker-hub'
-          repository: 'kuldeepazad15/currency-exchange-devops'
-          command: 'buildAndPush'
-          Dockerfile: 'https://github.com/kuldeepeci/azure-devops-kubernetes-terraform-pipeline/blob/main/Dockerfile'
-          tags: '$(tag)'
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'kuldeepazad15-docker-hub'
+        repository: 'kuldeepazad15/currency-exchange-devops'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+        tags: '$(tag)'
